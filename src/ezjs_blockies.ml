@@ -38,7 +38,7 @@ let ready ?(not_found=fun () -> ()) ?(timeout=500.) f =
     let cb () = match blockies_opt () with
       | None -> not_found ()
       | Some b -> f b in
-    ignore @@ Dom_html.window##setTimeout (wrap_callback cb) timeout
+    ignore @@ Dom_html.window##setTimeout (wrap_callback cb) (Js.float timeout)
   | Some b -> f b
 
 let create ?seed ?color ?bgcolor ?size ?scale ?spotcolor () =
