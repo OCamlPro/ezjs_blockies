@@ -29,8 +29,8 @@ let make_opts ?seed ?color ?bgcolor ?size ?scale ?spotcolor () : blockies_option
     val spotcolor = optdef string spotcolor
   end
 
-let blockies () : blockies t = Unsafe.variable "blockies"
-let blockies_opt () : blockies t option = Optdef.to_option @@ Unsafe.variable "blockies"
+let blockies () : blockies t = Unsafe.global  ##. blockies
+let blockies_opt () : blockies t option = Optdef.to_option @@ Unsafe.global ##. blockies
 
 let ready ?(not_found=fun () -> ()) ?(timeout=500.) f =
   match blockies_opt () with
